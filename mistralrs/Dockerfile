@@ -31,7 +31,7 @@
 
 # Select an available version from
 # https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/supported-tags.md:
-FROM nvidia/cuda:12.3.2-cudnn9-devel-rockylinux9 as build
+FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-devel-rockylinux9 as build
 ARG CUDA_COMPUTE_CAP
 RUN dnf install -y openssl-devel && dnf clean all && rm -rf /var/cache/dnf/*
 # package `clap v4.5.2` cannot be built because it requires rustc 1.74 and Rocky 9 has 1.71:
@@ -40,7 +40,7 @@ ADD https://github.com/EricLBuehler/mistral.rs.git#master /mistralrs
 WORKDIR /mistralrs
 RUN cargo install --path mistralrs-server --features cuda,cudnn,flash-attn
 
-FROM nvidia/cuda:12.3.2-cudnn9-runtime-rockylinux9 as runtime
+FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-runtime-rockylinux9 as runtime
 ARG USERID=1000
 COPY --from=build /root/.cargo/bin/mistralrs-server /usr/local/bin
 RUN adduser -u $USERID user
