@@ -33,11 +33,13 @@
 # https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/supported-tags.md:
 FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-devel-rockylinux9 as build
 ARG CUDA_COMPUTE_CAP
-RUN dnf install -y openssl-devel && dnf clean all && rm -rf /var/cache/dnf/*
+RUN dnf install -y git openssl-devel && dnf clean all && rm -rf /var/cache/dnf/*
 # package `clap v4.5.2` cannot be built because it requires rustc 1.74 and Rocky 9 has 1.71:
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && ln -s /root/.cargo/bin/* /usr/local/bin
-ADD https://github.com/EricLBuehler/mistral.rs.git#master /mistralrs
-WORKDIR /mistralrs
+# Not supported by Podman / Buildah https://github.com/containers/buildah/issues/4974:
+#ADD https://github.com/EricLBuehler/mistral.rs.git#master /mistral.rs
+RUN git clone https://github.com/EricLBuehler/mistral.rs.git
+WORKDIR /mistral.rs
 RUN cargo install --path mistralrs-server --features cuda,cudnn,flash-attn
 
 FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-runtime-rockylinux9 as runtime
