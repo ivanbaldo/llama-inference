@@ -19,9 +19,15 @@
 #
 # In another terminal:
 #
-# docker exec -it -u0:0 mistralrs-bench sh -c 'dnf -y install python3-requests python3-pip && \
+# Rocky 9:
+# docker exec -u0:0 mistralrs-bench sh -c 'dnf -y install python3-requests python3-pip && \
 #   pip3 install transformers pandas'
-# docker exec -it -uuser mistralrs-bench sh -c 'cd /home/user/llama-inference/anyscale && \
+# or Ubuntu 22.04:
+# docker exec -u0:0 mistralrs-bench sh -c 'apt-get update && \
+#   apt-get install --no-install-recommends -y python3-requests python3-pip python3-pandas && \
+#   pip3 install transformers'
+#
+# docker exec -it mistralrs-bench sh -c 'cd /home/user/llama-inference/anyscale && \
 #   OPENAI_API_BASE=http://localhost:8080/v1 OPENAI_API_KEY=none python3 bench.py'
 #
 # If using Podman with CDI substitute
