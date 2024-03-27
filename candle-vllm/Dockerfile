@@ -30,20 +30,24 @@
 
 # Select an available version from
 # https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/supported-tags.md:
-# Doesn't work with Redhat based Linux https://github.com/EricLBuehler/candle-vllm/issues/25:
-#FROM nvidia/cuda:12.2.2-cudnn8-devel-rockylinux9 as build
-FROM nvidia/cuda:12.2.2-cudnn8-devel-ubuntu22.04 as build
+# Need to use older Ubuntu 22.04 instead of Rocky 9 or 8 because of linking issues
+# https://github.com/huggingface/candle/issues/1844:
+#FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-devel-rockylinux9 as build
+FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-devel-ubuntu22.04 as build
 
 ARG CUDA_COMPUTE_CAP
 #RUN dnf install -y cargo openssl-devel && dnf clean all && rm -rf /var/cache/dnf/*
-RUN apt-get update && apt-get install -y curl libssl-dev pkg-config && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install --no-install-recommends -y git curl libssl-dev pkg-config && \
+    rm -rf /var/lib/apt/lists/*
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && ln -s /root/.cargo/bin/* /usr/local/bin
-ADD https://github.com/EricLBuehler/candle-vllm.git#master /candle-vllm
+# Not supported by Podman / Buildah https://github.com/containers/buildah/issues/4974:
+#ADD https://github.com/EricLBuehler/candle-vllm.git#master /candle-vllm
+RUN git clone https://github.com/EricLBuehler/candle-vllm.git
 WORKDIR /candle-vllm
 RUN cargo install --path . --features cuda,cudnn,flash-attn,nccl
 
-#FROM nvidia/cuda:12.2.2-cudnn8-runtime-rockylinux9
-FROM nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu22.04 as runtime
+#FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-runtime-rockylinux9
+FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-runtime-ubuntu22.04 as runtime
 ARG USERID=1000
 COPY --from=build /root/.cargo/bin/candle-vllm /usr/local/bin
 RUN ln -s /usr/local/cuda/compat/libcuda.so.1 /lib/x86_64-linux-gnu/ && ldconfig
