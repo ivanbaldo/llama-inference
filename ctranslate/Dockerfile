@@ -26,7 +26,7 @@
 
 # Select an available version from
 # https://github.com/OpenNMT/CTranslate2/pkgs/container/ctranslate2:
-FROM ghcr.io/opennmt/ctranslate2:latest-ubuntu20.04-cuda11.2
+FROM ghcr.io/opennmt/ctranslate2:latest-ubuntu20.04-cuda12.2
 
 RUN pip install --no-cache-dir torch transformers pandas
 
