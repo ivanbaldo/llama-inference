@@ -1,5 +1,5 @@
-from mlc_chat import ChatModule, ChatConfig
-from mlc_chat.callback import StreamToStdout
+from mlc_llm import ChatModule, ChatConfig
+from mlc_llm.callback import StreamToStdout
 from transformers import AutoTokenizer
 import time
 import sys
