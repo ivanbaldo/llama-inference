@@ -21,18 +21,15 @@
 
 # Select an available version from
 # https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/supported-tags.md:
-FROM nvidia/cuda:12.2.2-cudnn8-runtime-rockylinux9
+# 2024-04-02 PyTorch was compiled for CUDNN8:
+#FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-runtime-rockylinux9
+FROM nvcr.io/nvidia/cuda:12.2.2-cudnn8-runtime-rockylinux9
 
-RUN yum install -y \
+RUN dnf install -y \
   python3-pip cuda-cupti-$(echo $CUDA_VERSION | sed -r 's/(.+)[.](.+)[.].*/\1-\2/') && \
-  yum clean all && rm -rf /var/cache/yum/*
+  dnf clean all && rm -rf /var/cache/dnf/*
 
-# 2023-12-07 giving ImportError regarding bitsandbytes and accelerate unless using --pre, also for
-# some reason some package needs scipy: 
-RUN pip install --no-cache-dir --pre transformers accelerate optimum bitsandbytes auto_gptq scipy
-
-# PyTorch doesn't find it by default, /usr/local/lib64/ doesn't work neither:
-RUN ln -s /usr/local/cuda-12/lib64/libcupti.so.12 /usr/lib64/
+RUN pip install --no-cache-dir transformers accelerate optimum bitsandbytes auto_gptq scipy
 
 ARG USERID=1000
 RUN adduser -u $USERID user
