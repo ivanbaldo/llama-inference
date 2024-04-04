@@ -1,4 +1,5 @@
-import openai
+from openai import OpenAI
+
 import os, sys, time, argparse
 if not os.getenv('OPENAI_API_KEY'):
     raise ValueError("Must set environment variable OPENAI_API_KEY")
@@ -6,8 +7,8 @@ import pandas as pd
 sys.path.append('../common/')
 from questions import questions
 
-url = 'http://0.0.0.0:5001/v1'
-openai.api_base = url
+client = OpenAI(base_url='http://0.0.0.0:5001/v1')
+
 # Parse the command-line arguments
 # Define the argument parser
 parser = argparse.ArgumentParser(description='Run LLM inference requests and save to a csv.')
@@ -22,7 +23,7 @@ def generate_text_and_save_results(filename):
 
     for q in questions:
         start = time.perf_counter()
-        result =openai.Completion.create(model='TheBloke_Llama-2-7B-GPTQ',
+        result =client.completions.create(model='TheBloke_Llama-2-7B-GPTQ',
                                          prompt=q,
                                          max_tokens=200,
                                          temperature=0)
