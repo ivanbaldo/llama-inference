@@ -39,15 +39,15 @@
 
 # Select an available version from
 # https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/supported-tags.md:
-FROM nvidia/cuda:12.3.1-devel-rockylinux9
-ARG USERID=1000
-RUN yum install -y python3-pip cmake libcudnn8 git && yum clean all && rm -rf /var/cache/yum/*
+FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-devel-rockylinux9
+RUN dnf install -y python3-pip cmake git && dnf clean all && rm -rf /var/cache/dnf/*
 RUN git clone https://github.com/SJTU-IPADS/PowerInfer
 WORKDIR /PowerInfer
 RUN pip install --no-cache-dir -r requirements.txt
 RUN cmake -S . -B build -DLLAMA_CUBLAS=ON
 RUN cmake --build build --config Release -j "$(nproc)"
 RUN pip install --no-cache-dir pandas #for the benchmark.
+ARG USERID=1000
 RUN adduser -u $USERID user
 USER user
 
