@@ -39,7 +39,9 @@
 
 # Select an available version from
 # https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/supported-tags.md:
-FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-devel-rockylinux9
+# 2024-04-04 CUDNN9 not supported yet:
+#FROM nvcr.io/nvidia/cuda:12.3.2-cudnn9-devel-rockylinux9
+FROM nvcr.io/nvidia/cuda:12.2.2-cudnn8-devel-rockylinux9
 RUN dnf install -y python3-pip cmake git && dnf clean all && rm -rf /var/cache/dnf/*
 RUN git clone https://github.com/SJTU-IPADS/PowerInfer
 WORKDIR /PowerInfer
