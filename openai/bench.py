@@ -1,6 +1,6 @@
 import sys
-import pandas as pd
 
+import pandas as pd
 from client import args, chat
 
 sys.path.append("../common/")
