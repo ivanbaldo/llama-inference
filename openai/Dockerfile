@@ -16,6 +16,7 @@ FROM docker.io/python:3.12-bookworm
 ARG USERID=1000
 COPY requirements.txt /tmp
 RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
+# hadolint ignore=DL3059
 RUN adduser --disabled-password --gecos '' -u $USERID user
 USER user
 WORKDIR /home/user/llama-inference/openai/
@@ -26,3 +27,4 @@ CMD [ \
     "--filename", "/dev/stdout", \
     "--note", "gpt-3.5-turbo" \
 ]
+#trivy:ignore:ds026
