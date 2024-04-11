@@ -6,7 +6,7 @@ sys.path.append('../common/')
 from questions import questions
 import pandas as pd
 
-generator = ctranslate2.Generator("llama-2-7b-ct2", device="cuda")
+generator = ctranslate2.Generator("llama-2-7b-ct2", device="cuda", tensor_parallel=True, flash_attention=True)
 tokenizer = transformers.AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-hf")
 
 def predict(prompt:str):
