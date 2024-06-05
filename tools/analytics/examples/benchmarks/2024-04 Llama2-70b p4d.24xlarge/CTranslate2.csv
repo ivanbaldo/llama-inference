@@ -1,0 +1,66 @@
+tok_count,time,question,answer,note
+200,9.806170814000325,Write a Rust function that performs binary exponentiation.,"
+Binary exponentiation is a method of computing large powers of a number, which works by repeatedly squaring the number. For example, to compute 210, we can do the following:
+210 = 22 * 22 * 22 * 22 * 22
+= 4 * 4 * 4 * 4 * 2
+= 16 * 16 * 4 * 2
+= 256 * 64 * 2
+= 16384 * 2
+= 32768 * 1
+The binary exponentiation algorithm works by repeatedly squaring the number and multiplying it by itself. The algorithm is as follows:
+function binary_exponentiation(base, exponent):
+if exponent == 0:
+return base * binary_exponentiation(base, exponent - 1)
+In this exercise, you will write",CTranslate2 int8 quantization
+200,8.608169628000269,What are the differences between Javascript and Python?,"
+Javascript is a scripting language that is used to create interactive web pages. It is a client-side scripting language, which means that it is executed by the web browser. Python is a programming language that is used to create web applications. It is a server-side scripting language, which means that it is executed by the web server.
+Javascript is a scripting language that is used to create interactive web pages. It is a client-side scripting language, which means that it is executed by the web browser. Python is a programming language that is used to create web applications. It is a server-side scripting language, which means that it is executed by the web server. Javascript is a scripting language that is used to create interactive web pages. It is a client-side scripting language, which means that it is executed by the web browser. Python is a programming language that is used to create web applications. It is a server-side script",CTranslate2 int8 quantization
+200,8.625971630000095,"Write a story in the style of James Joyce about a trip to the Australian outback in 2083, to see robots in the beautiful desert.","
+The story should be written in the style of James Joyce, and should be about a trip to the Australian outback in 2083, to see robots in the beautiful desert.
+The story should be written in the style of James Joyce, and should be about a trip to the Australian outback in 2083, to see robots in the beautiful desert. The story should be written in the style of James Joyce, and should be about a trip to the Australian outback in 2083, to see robots in the beautiful desert. The story should be written in the style of James Joyce, and should be about a trip to the Australian outback in 2083, to see robots in the beautiful desert. The story should be written in the style of James Joyce, and should be about a trip to the Australian outback in 2083, to see robots in the beautiful",CTranslate2 int8 quantization
+200,8.571148188999814,Who does Harry turn into a balloon?,"
+Who does Harry turn into a balloon? – Additional Questions
+What is the spell to turn into a balloon?
+What is the spell to turn into a cat?
+What is the spell to turn into a dog?
+What is the spell to turn into a snake?
+What is the spell to turn into a wolf?
+What is the spell to turn into a rat?
+What is the spell to turn into a bat?
+What is the spell to turn into a bird?
+What is the spell to turn into a rabbit?
+What is the spell to turn into a frog?
+What is the spell to turn into a cat in Harry Potter?
+What is the spell to turn into a cat in Harry Potter Hogwarts mystery?
+What is the spell to turn into a cat in Harry Potter Wizards Unite?
+What is the spell to turn into a cat in Harry Potter",CTranslate2 int8 quantization
+200,8.603064217999872,Write a tale about a time-traveling historian who's determined to witness the most significant events in human history.,"
+Write a story about a character who's determined to make the most of their time on Earth.
+Write a story about a character who's determined to make the most of their time on Earth. What do they do with their time? What do they learn?
+Write a story about a character who's determined to make the most of their time on Earth. What do they do with their time? What do they learn? What do they regret?
+Write a story about a character who's determined to make the most of their time on Earth. What do they do with their time? What do they learn? What do they regret? What do they leave behind?
+Write a story about a character who's determined to make the most of their time on Earth. What do they do with their time? What do they learn? What do they regret? What do they leave behind? What do they wish they'd done differently?
+Write a story about a",CTranslate2 int8 quantization
+200,8.584872322000138,What is the product of 9 and 8?,"
+What is the product of 9 and 8? The product of 9 and 8 is 72.
+What is the product of 9 and 8 and 7?
+What is the product of 9 and 8 and 7? The product of 9 and 8 and 7 is 504.
+What is the product of 9 and 8 and 7 and 6?
+What is the product of 9 and 8 and 7 and 6? The product of 9 and 8 and 7 and 6 is 3,008.
+What is the product of 9 and 8 and 7 and 6 and 5?
+What is the product of 9 and 8 and 7 and 6 and 5? The product of 9 and 8 and 7 and 6 and 5 is 18,048.
+What",CTranslate2 int8 quantization
+200,8.582286617000136,"If a train travels 120 kilometers in 2 hours, what is its average speed?","
+A train travels 120 kilometers in 2 hours.
+The average speed of the train is 60 kilometers per hour.
+The average speed of the train is 60 kilometers per hour. The average speed of the train is 60 kilometers per hour. The average speed of the train is 60 kilometers per hour. The average speed of the train is 60 kilometers per hour. The average speed of the train is 60 kilometers per hour. The average speed of the train is 60 kilometers per hour. The average speed of the train is 60 kilometers per hour. The average speed of the train is 60 kilometers per hour. The average speed of the train is 60 kilometers per hour. The average speed of the train is 60 kilometers per hour. The average speed of the train is 60 kilometers per hour. The average",CTranslate2 int8 quantization
+200,8.65109187600001,"Think through this step by step. If the sequence a_n is defined by a_1 = 3, a_2 = 5, and a_n = a_(n-1) + a_(n-2) for n > 2, find a_6.","
+a_6 = a_5 + a_4 = 5 + 8 = 13.
+a_6 = a_5 + a_4 = 8 + 13 = 21.
+a_6 = a_5 + a_4 = 13 + 21 = 34.
+a_6 = a_5 + a_4 = 21 + 34 = 55.
+a_6 = a_5 + a_4 = 34 + 55 = 89.
+a_6 = a_5 + a_4 = 55 + 89 = 144.
+a_6 = a_5 + a_4 = 89 + 144 = 233.
+a_6 = a_5 + a_4 = 144 + 233 = 3",CTranslate2 int8 quantization
+

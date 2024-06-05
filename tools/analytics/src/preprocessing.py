@@ -1,7 +1,11 @@
 import os, sys
 from typing import List
 
+<<<<<<< HEAD
 from dataframe_image.converter.browser.chrome_converter import shutil
+=======
+import shutil
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
 
 from config import MPSTAT_HEADER
 
@@ -13,8 +17,13 @@ def preprocess_files(files: List[str]):
         outdir = parent_dir + "_preprocessed/" + "/".join(rest) 
         if not os.path.exists(outdir):
             os.makedirs(outdir, exist_ok=True)
+<<<<<<< HEAD
             #os.mkdir(outdir)
         dst = f"{outdir}/{file}"
+=======
+        filename = os.path.basename(file)
+        dst = f"{outdir}/{filename}"
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
 
         match file.split(".")[-1]:
@@ -25,7 +34,11 @@ def preprocess_files(files: List[str]):
             case "nvidia-smi":
                 result = _preprocess_nvidia_smi(file)
             case "csv":
+<<<<<<< HEAD
                 # Solo copiamos el archivo xq ya está bien formateado
+=======
+                # Already correct formatting, just copy it over
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
                 shutil.copy(file, dst)  
                 continue
             case _:
@@ -39,7 +52,11 @@ def preprocess_files(files: List[str]):
 def _preprocess_mpstat(file) -> str:
     with open(file) as f:
         data = f.readlines()
+<<<<<<< HEAD
         # Borramos las líneas vacías o los headers inútiles/redundantes
+=======
+        # Filter out blank lines and useless or redundant headers
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
         keep = [
             _replace_spaces_with_tabs(line)
             for line in data
@@ -60,14 +77,24 @@ def _preprocess_free(file) -> str:
             if "free" not in l
         ])
     # agregamos type porque sino el campo de tipo de memoria queda pegado al total
+<<<<<<< HEAD
+=======
+    # add a type 
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
     return f"type\t{_replace_spaces_with_tabs(header)}{data}"
 
 def _preprocess_nvidia_smi(file) -> str:
     with open(file) as f:
         lines = f.readlines()
+<<<<<<< HEAD
         # Empieza con "# " así q lo sacamos
         header = lines[0][2:]
         # Solamente salteamos las unidades
+=======
+        # Remove the two first lines that start with '#'
+        header = lines[0][2:]
+        # Skip units
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
         rest = lines[2:]
         data = [
             _replace_spaces_with_tabs(l)

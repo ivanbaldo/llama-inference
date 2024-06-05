@@ -22,10 +22,17 @@ class AnalysisResults:
     color_h2l = COLOR_SCHEME
     # Low to high
     color_l2h = COLOR_SCHEME + "_r"
+<<<<<<< HEAD
     destdir = "static"
 
     def __init__(self) -> None:
         self.results = dict()
+=======
+
+    def __init__(self, destdir: str) -> None:
+        self.results = dict()
+        self.destdir = destdir
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
         for format, schema in OUTPUT_SCHEMAS.items():
             self.results[format] = pd.DataFrame(columns=schema)
 
@@ -39,6 +46,12 @@ class AnalysisResults:
         return "\n".join(result)
 
     def __render_page(self):
+<<<<<<< HEAD
+=======
+        graph_file = f"{self.destdir}/graph.{OUTPUT_FORMAT}"
+        generated_files = [graph_file]
+
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
         for datafmt, data in self.results.items():
             if data.empty:
                 continue
@@ -51,11 +64,17 @@ class AnalysisResults:
                 .hide() \
                 .format(precision=1, thousands="", decimal=".") 
 
+<<<<<<< HEAD
             print(f"Guardando en {self.destdir}/table_{datafmt}.{OUTPUT_FORMAT}")
+=======
+            filename = f"{self.destdir}/table_{datafmt}.{OUTPUT_FORMAT}"
+            print(f"Saving in {self.destdir}/table_{datafmt}.{OUTPUT_FORMAT}")
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
             dfi.export(
                 # data.style.background_gradient(subset=["first%"], cmap=COLOR_SCHEME),
                 # .format("{:,.2f}".format),
                 styled,
+<<<<<<< HEAD
                 f"{self.destdir}/table_{datafmt}.{OUTPUT_FORMAT}",
                 table_conversion="matplotlib",
             )
@@ -68,6 +87,23 @@ class AnalysisResults:
         plt.savefig(f"{self.destdir}/graph.{OUTPUT_FORMAT}", bbox_inches="tight", dpi=400)
 
     def render_all(self):  # , metric):
+=======
+                filename,
+                table_conversion="matplotlib",
+            )
+            generated_files.append(filename)
+
+        environment = Environment(loader=FileSystemLoader("templates/"))
+        template = environment.get_template("graph.html")
+        content = template.render(
+            files=[os.path.abspath(f) for f in generated_files]
+        )
+        with open(f"{self.destdir}/index.html", "w+") as f:
+            f.write(content)
+        plt.savefig(graph_file, bbox_inches="tight", dpi=400)
+
+    def render_all(self):
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
         self.__postprocess_data()
         metric = METRICS[0]
         self.results["csv"].plot.bar(y=metric, **GRAPH_STYLE)
@@ -77,7 +113,11 @@ class AnalysisResults:
 
     def add_entry(self, filename: str, row):
         """
+<<<<<<< HEAD
         Agregamos de a una row
+=======
+        Used to add one row at a time
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
         """
         file = filename.split("/")[-1]
         title = file.split(".")[0]

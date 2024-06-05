@@ -13,7 +13,11 @@ def main(args):
     directory = args[1]
     out = args[2]
     files = get_data_files(directory)
+<<<<<<< HEAD
     results = AnalysisResults()
+=======
+    results = AnalysisResults(out)
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
     results.set_destdir(out)
 
     for file in files:
@@ -66,8 +70,12 @@ def get_data_files(dir: str) -> List[str]:
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     help_text = "Uso: \n\t py main.py [--preprocess] [directorio]"
 
+=======
+    help_text = "Usage: \n\t py main.py [--preprocess] [directory]"
+>>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
     sns.set_theme(style="darkgrid", palette=COLOR_SCHEME)
     if len(sys.argv) <= 1:
         print(help_text)
