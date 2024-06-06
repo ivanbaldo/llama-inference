@@ -1,12 +1,15 @@
 {
     "recommendations": [
-        "MS-CST-E.vscode-devskim",
+        "ms-python.vscode-pylance",
+        "esbenp.prettier-vscode",
         "matangover.mypy",
-        "ms-python.python",
-        "exiasr.hadolint",
-        "streetsidesoftware.code-spell-checker",
-        "ms-pyright.pyright",
         "AquaSecurityOfficial.trivy-vulnerability-scanner",
-        "charliermarsh.ruff"
+        "HTMLHint.vscode-htmlhint",
+        "streetsidesoftware.code-spell-checker",
+        "charliermarsh.ruff",
+        "ms-python.python",
+        "MS-CST-E.vscode-devskim",
+        "monosans.djlint",
+        "exiasr.hadolint"
     ]
 }
