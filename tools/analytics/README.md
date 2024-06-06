@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-# Análisis de performance de LLMs
-
-## Cómo correr
-Primero hay que preprocesar los archivos para que se arreglen los problemas con los formatos
-Básicamente convertimos todos los formatos en TSV
-```
-rm -r <carpeta vieja preprocesada si existe>
-python3 src/main.py --preprocess <carpeta con las benchmarks>
-```
-
-Esto genera una carpeta llamada `curated_data` con todos los archivos
-Ahora podemos correr:
-```
-python3 src/main.py curated_data
-```
-
-Esto genera el archivo `tmp/index.html` que lo podés abrir en el navegador para ver las imágenes
-
-Algunos aspectos sobre el formato de las imágenes es configurable en `src/config.py`
-=======
 # LLM performance analysis
 
 ## How to run
@@ -92,5 +71,33 @@ tmp
 └── table_nvidia-smi.png
 ```
 
+## File preprocessing
+Example .free file before preprocessing:
+```
+               total        used        free      shared  buff/cache   available
+Mem:         1148221        7438      881686           9      264579     1140783
+Swap:              0           0           0
 
->>>>>>> a25d5d7 (translated docs and fixed inconsistencies)
+               total        used        free      shared  buff/cache   available
+Mem:         1148221        8174      880949           9      264582     1140046
+Swap:              0           0           0
+
+               total        used        free      shared  buff/cache   available
+Mem:         1148221        8434      880687           9      264584     1139786
+Swap:              0           0           0
+...
+```
+
+After preprocessing:
+```
+type	total	used	free	shared	buff/cache	available
+Mem:	1148221	7438	881686	9	264579	1140783
+Swap:	0	0	0
+
+Mem:	1148221	8174	880949	9	264582	1140046
+Swap:	0	0	0
+
+Mem:	1148221	8434	880687	9	264584	1139786
+Swap:	0	0	0
+...
+```
