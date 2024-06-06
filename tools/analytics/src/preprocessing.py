@@ -1,7 +1,7 @@
-import os, sys
-from typing import List
-
+import os
 import shutil
+import sys
+from typing import List
 
 from config import MPSTAT_HEADER
 
@@ -10,7 +10,7 @@ def preprocess_files(files: List[str]):
     for file in files:
         parent_dir = os.path.dirname(file).split("/")[0]
         rest = os.path.dirname(file).split("/")[1:]
-        outdir = parent_dir + "_preprocessed/" + "/".join(rest) 
+        outdir = parent_dir + "_preprocessed/" + "/".join(rest)
         if not os.path.exists(outdir):
             os.makedirs(outdir, exist_ok=True)
         filename = os.path.basename(file)
@@ -26,7 +26,7 @@ def preprocess_files(files: List[str]):
                 result = _preprocess_nvidia_smi(file)
             case "csv":
                 # Already correct formatting, just copy it over
-                shutil.copy(file, dst)  
+                shutil.copy(file, dst)
                 continue
             case _:
                 print(f"[WARNING] Unsupported file format: {dst}", file=sys.stderr)
@@ -54,13 +54,10 @@ def _preprocess_free(file) -> str:
         lines = f.readlines()
         header = lines[0]
         rest = lines[1:]
-        data = "".join([
-            _replace_spaces_with_tabs(l) 
-            for l in rest
-            if "free" not in l
-        ])
+        data = "".join([_replace_spaces_with_tabs(l) for l in rest if "free" not in l])
     # the column which indicates Mem or Swap lacks a name, call it type and add it to the header
     return f"type\t{_replace_spaces_with_tabs(header)}{data}"
+
 
 def _preprocess_nvidia_smi(file) -> str:
     with open(file) as f:
@@ -69,12 +66,9 @@ def _preprocess_nvidia_smi(file) -> str:
         header = lines[0][2:]
         # Skip units
         rest = lines[2:]
-        data = [
-            _replace_spaces_with_tabs(l)
-            for l in rest
-            if "#" not in l
-        ]
+        data = [_replace_spaces_with_tabs(l) for l in rest if "#" not in l]
         return _replace_spaces_with_tabs(header) + "".join(data)
+
 
 def _replace_spaces_with_tabs(text):
     return "\t".join([x for x in text.split(" ") if x != ""])

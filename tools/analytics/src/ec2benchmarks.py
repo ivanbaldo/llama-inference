@@ -2,6 +2,7 @@ import pandas as pd
 
 # from config import METRICS
 
+
 def __get_avg_tok_p_s(path: str):
     df = pd.read_csv(path).drop("note", axis=1)
     df["tok_per_sec"] = df["tok_count"] / df["time"]
@@ -19,7 +20,6 @@ def __get_avg_tok_p_s(path: str):
 #     return df
 
 
-
 def process(file):
     # name = os.path.basename(file)
     # data = (name[:-4], *__get_avg_tok_p_s(file))
@@ -30,5 +30,3 @@ def process(file):
 
     # return data
     return __get_avg_tok_p_s(file)
-
-
