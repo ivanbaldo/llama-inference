@@ -1,10 +1,9 @@
 import os
 from typing import Dict
-from jinja2 import Environment, FileSystemLoader
+
 import dataframe_image as dfi
 import matplotlib.pyplot as plt
 import pandas as pd
-
 from config import (
     COLOR_SCHEME,
     GRAPH_STYLE,
@@ -13,7 +12,13 @@ from config import (
     OUTPUT_FORMAT,
     OUTPUT_SCHEMAS,
 )
-from postprocess import postprocess_csv, postprocess_free, postprocess_mpstat, postprocess_nvidia_smi
+from jinja2 import Environment, FileSystemLoader
+from postprocess import (
+    postprocess_csv,
+    postprocess_free,
+    postprocess_mpstat,
+    postprocess_nvidia_smi,
+)
 
 
 class AnalysisResults:
@@ -49,10 +54,11 @@ class AnalysisResults:
             # float_cols = [col for col in data.columns if col != "title" and col != hl_metric  ]
             # data[float_cols] = data[float_cols].map('{:.2f}'.format)#.astype(float)
             cmap = self.color_h2l if h2l else self.color_l2h
-            styled = data.style \
-                .background_gradient(subset=[hl_metric], cmap=cmap) \
-                .hide() \
-                .format(precision=1, thousands="", decimal=".") 
+            styled = (
+                data.style.background_gradient(subset=[hl_metric], cmap=cmap)
+                .hide()
+                .format(precision=1, thousands="", decimal=".")
+            )
 
             filename = f"{self.destdir}/table_{datafmt}.{OUTPUT_FORMAT}"
             print(f"Saving in {self.destdir}/table_{datafmt}.{OUTPUT_FORMAT}")
@@ -67,9 +73,7 @@ class AnalysisResults:
 
         environment = Environment(loader=FileSystemLoader("templates/"))
         template = environment.get_template("graph.html")
-        content = template.render(
-            files=[os.path.abspath(f) for f in generated_files]
-        )
+        content = template.render(files=[os.path.abspath(f) for f in generated_files])
         with open(f"{self.destdir}/index.html", "w+") as f:
             f.write(content)
         plt.savefig(graph_file, bbox_inches="tight", dpi=400)
